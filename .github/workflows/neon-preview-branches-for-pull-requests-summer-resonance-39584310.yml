@@ -20,12 +20,11 @@ jobs:
     secrets:
       NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
   db_usage_example:
-    needs:
-      - neon_branch_management
+    needs: neon_branch_management
     runs-on: ubuntu-latest
     steps: 
       - name: Connect to DB
         run: |
-          echo "${{ needs.neon_branch_management.outputs.database_url }}"
-          echo "${{ needs.neon_branch_management.outputs.database_url_unpooled }}"
+          echo "${{ needs.neon_branch_management.outputs.db_url_with_pooler }}"
+          echo "${{ needs.neon_branch_management.outputs.db_url }}"
       
