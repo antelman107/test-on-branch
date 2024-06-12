@@ -25,6 +25,6 @@ jobs:
     steps: 
       - name: Connect to DB
         run: |
-          echo ${{ needs }}
+          echo ${{ toJSON(needs) }}
           
       
