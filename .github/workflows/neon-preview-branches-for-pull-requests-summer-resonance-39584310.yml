@@ -26,7 +26,6 @@ jobs:
     steps: 
       - name: Connect to DB
         run: |
-          echo '${{ join(needs.neon_branch_management.outputs.database_url) }}'
-          apt-get install --yes --no-install-recommends postgresql-client
-          psql -c 'SHOW DATABASES' "${{ needs.neon_branch_management.outputs.database_url }}"
+          echo "${{ needs.neon_branch_management.outputs.database_url }}"
+          echo "${{ needs.neon_branch_management.outputs.database_url_unpooled }}"
       
