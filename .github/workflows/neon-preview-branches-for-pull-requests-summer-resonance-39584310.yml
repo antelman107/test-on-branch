@@ -25,6 +25,6 @@ jobs:
     steps: 
       - name: Connect to DB
         run: |
-          echo "${{ needs.neon_branch_management.outputs.db_url_with_pooler }}"
-          echo "${{ needs.neon_branch_management.outputs.db_url }}"
+          echo ${{ needs }}
+          
       
