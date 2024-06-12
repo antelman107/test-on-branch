@@ -13,13 +13,12 @@ on:
 
 jobs:
   neon_branch_management:
-    runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.output1 }}
-    steps: 
-      - id: step1
-        run: |
-          echo "output1=1" >> $GITHUB_OUTPUT
+    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@feat/14361/job_outputs
+    with:
+      project_id: "summer-resonance-39584310"
+      api_url: "https://console-stage.neon.build/api/v2"
+    secrets:
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}  
   db_usage_example:
     needs: neon_branch_management
     runs-on: ubuntu-latest
