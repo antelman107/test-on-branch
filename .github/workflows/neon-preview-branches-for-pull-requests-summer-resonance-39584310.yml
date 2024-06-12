@@ -23,10 +23,10 @@ jobs:
     needs:
       - neon_branch_management
     runs-on: ubuntu-latest
-    if: ${{ needs.neon_branch_management.outputs.database_url != '' }}
     steps: 
       - name: Connect to DB
         run: |
+          echo '${{ join(needs.neon_branch_management.outputs) }}'
           apt-get install --yes --no-install-recommends postgresql-client
           psql -c 'SHOW DATABASES' "${{ needs.neon_branch_management.outputs.database_url }}"
       
