@@ -13,10 +13,20 @@ on:
 
 jobs:
   neon_branch_management:
-    name: Create/Delete/Reset Branch for Pull Request Job
     uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@bug/14341/neon_branch_naming
     with:
       project_id: "summer-resonance-39584310"
       api_url: "https://console-stage.neon.build/api/v2"
     secrets:
       NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+  db_usage_example:
+    needs:
+      - neon_branch_management
+    runs-on: ubuntu-latest
+    if: jobs.neon_branch_management.outputs.database_url != ""
+    steps: 
+      - name: Connect to DB
+        run: |
+          apt-get install --yes --no-install-recommends postgresql-client
+          psql -c 'SHOW DATABASES' "${{ jobs.neon_branch_management.outputs.database_url }}"
+      
