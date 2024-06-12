@@ -13,7 +13,7 @@ on:
 jobs:
   neon_branch_management:
     name: Create/Delete/Reset Branch for Pull Request Job
-    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@14340/create_branch_parameters
+    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@bug/14340/create_branch_parameters
     with:
       project_id: "summer-resonance-39584310"
       api_url: "https://console-stage.neon.build/api/v2"
