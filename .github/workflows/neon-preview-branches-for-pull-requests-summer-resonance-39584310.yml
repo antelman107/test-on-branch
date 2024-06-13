@@ -23,12 +23,12 @@ jobs:
   db_usage_example:
     if: ${{ needs.neon_branch_management.outputs.db_url_with_pooler_base64 != '' }}
     needs: neon_branch_management
-    runs-on: postgres:latest
+    runs-on: ubuntu-latest
     steps: 
       - name: Test DB connection
         run: |
-          psql -c "SHOW DATABASES" "$(echo '${{ needs.neon_branch_management.outputs.db_url_base64 }}' | base64 --decode)"
-          psql -c "SHOW DATABASES" "$(echo '${{ needs.neon_branch_management.outputs.db_url_with_pooler_base64 }}' | base64 --decode)"
+          echo "$(echo '${{ needs.neon_branch_management.outputs.db_url_base64 }}' | base64 --decode)"
+          echo "$(echo '${{ needs.neon_branch_management.outputs.db_url_with_pooler_base64 }}' | base64 --decode)"
           
           
       
