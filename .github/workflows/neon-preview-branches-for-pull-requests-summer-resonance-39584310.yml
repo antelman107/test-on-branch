@@ -26,6 +26,7 @@ jobs:
     steps: 
       - name: Connect to DB
         run: |
+          apt-get update && apt-get install -y postgresql-client
           echo $(echo '${{ needs.neon_branch_management.outputs.db_url_base64 }}' | base64 --decode)
           echo $(echo '${{ needs.neon_branch_management.outputs.db_url_with_pooler_base64 }}' | base64 --decode)
           
