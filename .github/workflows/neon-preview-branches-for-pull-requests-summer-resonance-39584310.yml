@@ -1,0 +1,34 @@
+
+name: Create/Delete/Reset Branch for Pull Request Workflow
+run-name: Create/Delete/Reset Branch for Pull Request Workflow
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+      - labeled
+  workflow_dispatch:    
+
+jobs:
+  neon_branch_management:
+    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@feat/14361/job_outputs
+    with:
+      project_id: "summer-resonance-39584310"
+      api_url: "https://console-stage.neon.build/api/v2"
+    secrets:
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}  
+  db_usage_example:
+    if: ${{ needs.neon_branch_management.outputs.db_url_with_pooler_base64 != '' }}
+    needs: neon_branch_management
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Test DB connection
+        run: |
+          echo "$(echo '${{ needs.neon_branch_management.outputs.database_url_base64 }}' | base64 --decode)"
+          echo "$(echo '${{ needs.neon_branch_management.outputs.database_url_unpooled_base64 }}' | base64 --decode)"
+          
+          
+      
