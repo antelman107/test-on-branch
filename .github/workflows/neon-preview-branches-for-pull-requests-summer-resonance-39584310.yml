@@ -27,8 +27,8 @@ jobs:
     steps: 
       - name: Test DB connection
         run: |
-          echo "$(echo '${{ needs.neon_branch_management.outputs.db_url_base64 }}' | base64 --decode)"
-          echo "$(echo '${{ needs.neon_branch_management.outputs.db_url_with_pooler_base64 }}' | base64 --decode)"
+          echo "$(echo '${{ needs.neon_branch_management.outputs.database_url_base64 }}' | base64 --decode)"
+          echo "$(echo '${{ needs.neon_branch_management.outputs.database_url_unpooled_base64 }}' | base64 --decode)"
           
           
       
