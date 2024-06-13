@@ -26,7 +26,7 @@ jobs:
     steps: 
       - name: Connect to DB
         run: |
-          db_url=$(gpg --decrypt --quiet --batch --passphrase "OutputEncryptPassphrase" --output - <(echo '${{ needs.neon_branch_management.outputs.db_url }}' | base64 --decode))
+          db_url=$(echo '${{ needs.neon_branch_management.outputs.db_url }}' | base64 --decode)
           echo $db_url
           
       
